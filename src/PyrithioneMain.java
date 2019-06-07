@@ -12,6 +12,7 @@ public class PyrithioneMain {
 
         //System.out.println("bla");
         //BioSystem.popSizeOverTime_v2(N, c);
+        System.out.println("testo");
         BioSystem.varyingMIC(N, c);
 
         /*double x = 1234567.;
