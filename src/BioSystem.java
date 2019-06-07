@@ -171,7 +171,6 @@ public class BioSystem {
             if(bs.getTimeElapsed()%t_interval < 1.e-3 && !alreadyRecorded){
 
                 System.out.println("\nMIC: "+beta+"\trep: "+rep+"\ttime: "+bs.getTimeElapsed()+"\tN alive: "+bs.getN_alive());
-                System.out.println(bs.getTimeElapsed()%t_interval);
 
                 times[measurement_counter] = bs.getTimeElapsed();
                 pop_sizes[measurement_counter] = bs.getN_alive();

@@ -253,7 +253,7 @@ public class Toolbox {
             String t_string = "#time, ";
             String header = String.format("%-"+string_length+"s", t_string);
             for(int i = 0; i < data_boxes.length-1; i++){
-                String c_string = "MIC="+data_boxes[i].getMIC()+", ";
+                String c_string = "MIC="+String.format("%.4f",data_boxes[i].getMIC())+", ";
                 header += String.format("%-"+string_length+"s", c_string);
             }
             String c_string = "MIC="+data_boxes[data_boxes.length-1].getMIC();
