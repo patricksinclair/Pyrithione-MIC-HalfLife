@@ -140,7 +140,7 @@ public class BioSystem {
 
         for(int i = 0; i < nReps; i++){
             collated_times[i] = sub_results[i].getTimes();
-            System.out.println(Arrays.toString(collated_times[i]));
+            //System.out.println(Arrays.toString(collated_times[i]));
             collated_popSizes[i] = Toolbox.convertIntsToDoubles(sub_results[i].getPopSizes());
         }
 
@@ -174,7 +174,6 @@ public class BioSystem {
                 System.out.println(bs.getTimeElapsed()%t_interval);
 
                 times[measurement_counter] = bs.getTimeElapsed();
-                System.out.println("TIME: "+bs.getTimeElapsed());
                 pop_sizes[measurement_counter] = bs.getN_alive();
                 measurement_counter++;
                 alreadyRecorded = true;
@@ -184,7 +183,7 @@ public class BioSystem {
 
             bs.performAction();
         }
-        System.out.println("t interval: "+t_interval);
+        //System.out.println("t interval: "+t_interval);
 
         return new DataBox(times, pop_sizes);
     }

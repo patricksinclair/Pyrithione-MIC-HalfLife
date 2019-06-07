@@ -264,13 +264,15 @@ public class Toolbox {
 
             for(int t = 0; t < data_boxes[0].getAvg_times().length; t++){
 
-
-                String output = String.format("%-"+string_length+".4E,", data_boxes[0].getAvg_times()[t]);
+                String t_string_col = String.format("%.4E", data_boxes[0].getAvg_times()[t])+",";
+                String output = String.format("%-"+string_length+"s", t_string_col);
 
                 for(int MIC = 0; MIC < data_boxes.length-1; MIC++){
-                    output += String.format("%-"+string_length+".4E,", data_boxes[MIC].getAvg_popSizes()[t]);
+                    String pop_string = String.format("%.4E", data_boxes[MIC].getAvg_popSizes()[t])+",";
+                    output += String.format("%-"+string_length+"s", pop_string);
                 }
-                output += String.format("%-"+string_length+".4E", data_boxes[data_boxes.length-1].getAvg_popSizes()[t]);
+                String pop_string = String.format("%.4E", data_boxes[data_boxes.length-1].getAvg_popSizes()[t]);
+                output += String.format("%-"+string_length+"s", pop_string);
 
                 bw.write(output);
                 bw.newLine();
