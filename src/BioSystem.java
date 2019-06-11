@@ -137,7 +137,7 @@ public class BioSystem {
 
     public static void varyingMIC(int N, double c){
 
-        double minMIC = 1., maxMIC = 10.;
+        double minMIC = 1., maxMIC = 9.99; //don't do 10 as we need to avoid poisson zero errs
         int nMICsMeasured = 50;
         double MIC_increment = (maxMIC-minMIC)/nMICsMeasured;
 
@@ -189,7 +189,7 @@ public class BioSystem {
 
         double tau = 0.001;
         double t_interval = duration/nMeasurements;
-        System.out.println(t_interval);
+        //System.out.println(t_interval);
         //System.exit(8);
         double[] times = new double[nMeasurements+1];
         int[] pop_sizes = new int[nMeasurements+1];
