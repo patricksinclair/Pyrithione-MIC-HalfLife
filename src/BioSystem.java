@@ -59,6 +59,40 @@ public class BioSystem {
         timeElapsed += tau_step;
     }
 
+    public void performActionCorrectly(){
+        double tau_step = tau;
+        int current_pop = getN_alive();
+        int n_replications;
+        int n_deaths;
+
+        if(current_pop > 0){
+
+            whileloop:
+            while(true){
+                if(microhab.lethalConcentration()){
+
+                    n_replications = 0;
+                    n_deaths = new PoissonDistribution(current_pop*Math.abs(microhab.phi_c()*tau_step)).sample();
+                    if(n_deaths > current_pop){
+                        tau_step/=2;
+                        continue whileloop;
+                    }
+
+                }else{
+                    n_replications = new PoissonDistribution(current_pop*Math.abs(microhab.phi_c())*tau_step).sample();
+                    n_deaths = 0;
+                }
+
+                break whileloop;
+            }
+            int new_pop = current_pop + n_replications - n_deaths;
+            microhab.setN_alive(new_pop);
+            microhab.updateDeathCount(n_deaths);
+        }
+
+        timeElapsed+=tau_step;
+    }
+
 
     public void performActionIndividually(){
         double tau_step = tau;
@@ -104,15 +138,15 @@ public class BioSystem {
     public static void varyingMIC(int N, double c){
 
         double minMIC = 1., maxMIC = 10.;
-        int nMICsMeasured = 20;
+        int nMICsMeasured = 50;
         double MIC_increment = (maxMIC-minMIC)/nMICsMeasured;
 
         double duration = 24.;
         int nTimeMeasurements = 50;
-        int nReps = 24;
+        int nReps = 50;
 
         DataBox[] all_measurements = new DataBox[nMICsMeasured+1];
-        String filename = "Pyrithione-MIC-varying-tau-rescaled";
+        String filename = "Pyrithione-MIC-varying-tau-correct_gRate";
 
         for(int i = 0; i <= nMICsMeasured; i++){
             double beta_i = minMIC + i*MIC_increment;
@@ -122,7 +156,6 @@ public class BioSystem {
 
 
         Toolbox.writeDataboxArrayToFile(filename, all_measurements);
-
 
     }
 
@@ -180,7 +213,7 @@ public class BioSystem {
             //System.out.println("time: "+bs.getTimeElapsed()+"\t"+bs.getTimeElapsed()%t_interval);
             if(bs.getTimeElapsed()%t_interval > 0.1*t_interval) alreadyRecorded = false;
 
-            bs.performAction();
+            bs.performActionCorrectly();
         }
         //System.out.println("t interval: "+t_interval);
 

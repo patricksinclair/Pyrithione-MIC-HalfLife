@@ -48,7 +48,9 @@ public class Microhabitat {
     // this is slightly different to the nutrients sims where phi(c) determined
     // growth and death rates
     public double gRate(){
-        return 0.083;
+        double cB = c/beta();
+        double phi_c = 1. - (6.*cB*cB)/(5. + cB*cB);
+        return 0.083*phi_c;
     }
 
 
@@ -59,8 +61,9 @@ public class Microhabitat {
     }
 
     public double phi_c(){
+        //use this for the correct MIC calcs
         double cB = c/beta();
-        return 1. - (6.*cB*cB)/(5. + cB*cB);
+        return 0.083*(1. - (6.*cB*cB)/(5. + cB*cB));
     }
 
     public double replicationOrDeathRate(){
